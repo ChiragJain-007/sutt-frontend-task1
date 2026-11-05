@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linkstack | A link in bio built for you</title>
+  <meta name="description" content="A Linktree landing page clone built with HTML, CSS and vanilla JS for the SUTT Frontend Task 1." />
+
+  <!-- Font only, no CSS/JS libraries -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ================= HEADER / NAVBAR ================= -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="#" class="logo" aria-label="Linkstack home">
+        <img src="assets/images/logo.svg" alt="" width="26" height="26" />
+        <span>Linkstack</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#customize">Products</a></li>
+        <li><a href="#share">Templates</a></li>
+        <li><a href="#creators">Marketplace</a></li>
+        <li><a href="#analytics">Learn</a></li>
+        <li><a href="#faq">Pricing</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="#" class="btn btn-light">Log in</a>
+        <a href="#" class="btn btn-dark">Sign up free</a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-text reveal">
+          <h1>A link in bio built for you.</h1>
+          <p>
+            Join 70M+ people using Linkstack for their link in bio. One link to help you
+            share everything you create, curate and sell from your Instagram, TikTok,
+            Twitter, YouTube and other social media profiles.
+          </p>
+          <form class="claim-form" onsubmit="return false;">
+            <label class="claim-input">
+              <span>linkstack/</span>
+              <input type="text" placeholder="yourname" aria-label="Choose your username" />
+            </label>
+            <button type="submit" class="btn btn-forest btn-lg">Get started for free</button>
+          </form>
+        </div>
+
+        <!-- Phone mockup built purely with HTML + CSS -->
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="phone">
+            <div class="avatar avatar-lg">NF</div>
+            <p class="phone-name">@pistakio</p>
+            <div class="phone-icons"><i></i><i></i><i></i><i></i></div>
+            <div class="phone-link">Shop our spreads</div>
+            <div class="phone-link">Latest recipes</div>
+            <div class="phone-link">Find us in stores</div>
+            <div class="phone-cards"><span></span><span></span></div>
+          </div>
+          <div class="float-card float-1">🥜 New drop</div>
+          <div class="float-card float-2">▶ 12.4k views</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CUSTOMIZE ================= -->
+    <section class="feature feature-pink" id="customize">
+      <div class="container feature-grid">
+        <div class="feature-visual reveal" aria-hidden="true">
+          <div class="theme-stack">
+            <div class="theme-card t1"><span></span><span></span><span></span></div>
+            <div class="theme-card t2"><span></span><span></span><span></span></div>
+            <div class="theme-card t3"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="feature-text reveal">
+          <h2>Create and customize your Linkstack in minutes</h2>
+          <p>
+            Connect all your content across social media, websites, stores and more in one
+            link in bio. Customize every detail or let Linkstack automatically enhance it to
+            match your brand and drive more clicks.
+          </p>
+          <a href="#" class="btn btn-plum btn-lg">Get started for free</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SHARE ================= -->
+    <section class="feature feature-maroon" id="share">
+      <div class="container feature-grid reverse">
+        <div class="feature-visual reveal" aria-hidden="true">
+          <div class="share-grid">
+            <div class="share-tile">Instagram bio</div>
+            <div class="share-tile">TikTok</div>
+            <div class="share-tile">QR code</div>
+            <div class="share-tile">YouTube</div>
+            <div class="share-tile">Email signature</div>
+            <div class="share-tile">X / Twitter</div>
+          </div>
+        </div>
+        <div class="feature-text reveal">
+          <h2>Share your Linkstack from your Instagram, TikTok, Twitter and other bios</h2>
+          <p>
+            Add your unique Linkstack URL to all the platforms and places you find your
+            audience. Then use your QR code to drive your offline traffic online.
+          </p>
+          <a href="#" class="btn btn-pink btn-lg">Get started for free</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ANALYTICS ================= -->
+    <section class="feature feature-cream" id="analytics">
+      <div class="container feature-grid">
+        <div class="feature-visual reveal" aria-hidden="true">
+          <div class="stats-card">
+            <p class="stats-label">Lifetime clicks</p>
+            <p class="stats-number">48,291</p>
+            <div class="bars">
+              <span style="--h:40%"></span><span style="--h:65%"></span><span style="--h:50%"></span>
+              <span style="--h:80%"></span><span style="--h:60%"></span><span style="--h:95%"></span>
+              <span style="--h:75%"></span>
+            </div>
+          </div>
+        </div>
+        <div class="feature-text reveal">
+          <h2>Analyze your audience and keep your followers engaged</h2>
+          <p>
+            Track your engagement over time, monitor revenue and learn what's converting
+            your audience. Make informed updates on the fly to keep them coming back.
+          </p>
+          <a href="#" class="btn btn-blue btn-lg">Get started for free</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CAROUSEL (compulsory) ================= -->
+    <section class="creators" id="creators">
+      <div class="container">
+        <h2 class="section-title reveal">The fast, friendly and powerful link in bio tool.</h2>
+        <p class="section-sub reveal">Trusted by creators, brands and businesses of every size.</p>
+      </div>
+
+      <div class="carousel" id="carousel" tabindex="0" aria-roledescription="carousel" aria-label="Creators using Linkstack">
+        <button class="carousel-btn prev" id="prev" aria-label="Previous slide">&#8592;</button>
+
+        <div class="carousel-viewport">
+          <ul class="carousel-track" id="track">
+            <li class="slide"><article class="creator-card c1"><div class="avatar">SM</div><h3>Selena M.</h3><p>Musician</p><span class="handle">@selenamusic</span></article></li>
+            <li class="slide"><article class="creator-card c2"><div class="avatar">PK</div><h3>Pistakio</h3><p>Food brand</p><span class="handle">@pistakio</span></article></li>
+            <li class="slide"><article class="creator-card c3"><div class="avatar">AR</div><h3>Arjun R.</h3><p>Photographer</p><span class="handle">@arjunshoots</span></article></li>
+            <li class="slide"><article class="creator-card c4"><div class="avatar">TL</div><h3>The Loop</h3><p>Podcast</p><span class="handle">@theloopcast</span></article></li>
+            <li class="slide"><article class="creator-card c5"><div class="avatar">MV</div><h3>Maya V.</h3><p>Fitness coach</p><span class="handle">@mayamoves</span></article></li>
+            <li class="slide"><article class="creator-card c6"><div class="avatar">KD</div><h3>Kiln &amp; Dust</h3><p>Ceramics studio</p><span class="handle">@kilnanddust</span></article></li>
+          </ul>
+        </div>
+
+        <button class="carousel-btn next" id="next" aria-label="Next slide">&#8594;</button>
+        <div class="carousel-dots" id="dots" role="tablist" aria-label="Choose slide"></div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="faq" id="faq">
+      <div class="container narrow">
+        <h2 class="section-title reveal">Got questions?</h2>
+        <div class="faq-list">
+          <details class="reveal">
+            <summary>Why do I need a link in bio tool?</summary>
+            <p>Most social platforms only let you add one link. A link in bio page lets you share all your content, shops and socials from that single link.</p>
+          </details>
+          <details class="reveal">
+            <summary>Is Linkstack free?</summary>
+            <p>Yes. The free plan covers unlimited links and basic customization. Paid plans add analytics, scheduling and more themes.</p>
+          </details>
+          <details class="reveal">
+            <summary>Can I use my own domain?</summary>
+            <p>Yes, on paid plans you can connect a custom domain so your page lives at your own URL.</p>
+          </details>
+          <details class="reveal">
+            <summary>How many links can I add?</summary>
+            <p>As many as you like. Reorder them anytime by dragging, and hide or schedule links when you need to.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FINAL CTA ================= -->
+    <section class="cta" id="cta">
+      <div class="container cta-inner reveal">
+        <h2>Jumpstart your corner of the internet today</h2>
+        <form class="claim-form center" onsubmit="return false;">
+          <label class="claim-input">
+            <span>linkstack/</span>
+            <input type="text" placeholder="yourname" aria-label="Choose your username" />
+          </label>
+          <button type="submit" class="btn btn-lime btn-lg">Claim your Linkstack</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Blog</a></li><li><a href="#">Press</a></li></ul>
+      </div>
+      <div>
+        <h4>Community</h4>
+        <ul><li><a href="#">Creators</a></li><li><a href="#">Charities</a></li><li><a href="#">Creator report</a></li></ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul><li><a href="#">Help center</a></li><li><a href="#">Getting started</a></li><li><a href="#">FAQs</a></li></ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul><li><a href="#">Terms</a></li><li><a href="#">Privacy</a></li><li><a href="#">Cookies</a></li></ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>Built for SUTT Frontend Task 1 as a practice clone of the Linktree landing page. Not affiliated with Linktree.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
