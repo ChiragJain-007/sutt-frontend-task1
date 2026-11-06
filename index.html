@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Linkstack | A link in bio built for you</title>
+  <title>Linkstac | A link in bio built for you</title>
   <meta name="description" content="A Linktree landing page clone built with HTML, CSS and vanilla JS for the SUTT Frontend Task 1." />
 
   <!-- Font only, no CSS/JS libraries -->
@@ -19,16 +19,16 @@
   <!-- ================= HEADER / NAVBAR ================= -->
   <header class="site-header">
     <nav class="navbar" aria-label="Main navigation">
-      <a href="#" class="logo" aria-label="Linkstack home">
-        <img src="assets/images/logo.svg" alt="" width="26" height="26" />
-        <span>Linkstack</span>
+      <a href="#" class="logo" aria-label="Linkstac home">
+        <span>Linkstac</span>
+        <img src="assets/images/logo.svg" alt="" width="24" height="24" />
       </a>
 
       <ul class="nav-links" id="nav-links">
-        <li><a href="#customize">Products</a></li>
-        <li><a href="#share">Templates</a></li>
-        <li><a href="#creators">Marketplace</a></li>
-        <li><a href="#analytics">Learn</a></li>
+        <li><a href="#customize">Solutions</a></li>
+        <li><a href="#share">Features</a></li>
+        <li><a href="#analytics">Integrations</a></li>
+        <li><a href="#creators">Resources</a></li>
         <li><a href="#faq">Pricing</a></li>
       </ul>
 
@@ -49,168 +49,260 @@
         <div class="hero-text reveal">
           <h1>A link in bio built for you.</h1>
           <p>
-            Join 70M+ people using Linkstack for their link in bio. One link to help you
+            Join 70M+ people using Linkstac for their link in bio. One link to help you
             share everything you create, curate and sell from your Instagram, TikTok,
             Twitter, YouTube and other social media profiles.
           </p>
           <form class="claim-form" onsubmit="return false;">
             <label class="claim-input">
-              <span>linkstack/</span>
-              <input type="text" placeholder="yourname" aria-label="Choose your username" />
+              <span>linkst.ac/</span>
+              <input type="text" aria-label="Choose your username" />
             </label>
             <button type="submit" class="btn btn-forest btn-lg">Get started for free</button>
           </form>
         </div>
 
-        <!-- Phone mockup built purely with HTML + CSS -->
-        <div class="hero-visual reveal" aria-hidden="true">
-          <div class="phone">
-            <div class="avatar avatar-lg">NF</div>
-            <p class="phone-name">@pistakio</p>
-            <div class="phone-icons"><i></i><i></i><i></i><i></i></div>
-            <div class="phone-link">Shop our spreads</div>
-            <div class="phone-link">Latest recipes</div>
-            <div class="phone-link">Find us in stores</div>
-            <div class="phone-cards"><span></span><span></span></div>
+        <!-- Sliding panels: solid blocks that move forever.
+             Desktop: a tall column moving up, from the bottom of the
+             screen to the top, passing behind the navbar.
+             Phone: a row drifting left.
+             script.js copies the panels once so the loop is seamless. -->
+        <div class="hero-visual" aria-hidden="true">
+          <div class="panels-track" id="panels-track">
+            <div class="panel p1"></div>
+            <div class="panel p2"></div>
+            <div class="panel p3"></div>
+            <div class="panel p4"></div>
+            <div class="panel p5"></div>
+            <div class="panel p6"></div>
           </div>
-          <div class="float-card float-1">🥜 New drop</div>
-          <div class="float-card float-2">▶ 12.4k views</div>
         </div>
       </div>
     </section>
 
-    <!-- ================= CUSTOMIZE ================= -->
-    <section class="feature feature-pink" id="customize">
+    <!-- Empty panels (class "ep") stand in for photos, videos and
+         illustrations. They copy the SHAPE, POSITION and COLOUR of the
+         original visuals without the copyrighted images. -->
+
+    <!-- ================= 2. CUSTOMIZE ================= -->
+    <section class="feature feature-blue" id="customize">
       <div class="container feature-grid">
-        <div class="feature-visual reveal" aria-hidden="true">
-          <div class="theme-stack">
-            <div class="theme-card t1"><span></span><span></span><span></span></div>
-            <div class="theme-card t2"><span></span><span></span><span></span></div>
-            <div class="theme-card t3"><span></span><span></span><span></span></div>
-          </div>
-        </div>
         <div class="feature-text reveal">
-          <h2>Create and customize your Linkstack in minutes</h2>
+          <h2>Create and customize your Linkstac in minutes</h2>
           <p>
             Connect all your content across social media, websites, stores and more in one
-            link in bio. Customize every detail or let Linkstack automatically enhance it to
+            link in bio. Customize every detail or let Linkstac automatically enhance it to
             match your brand and drive more clicks.
           </p>
-          <a href="#" class="btn btn-plum btn-lg">Get started for free</a>
+        </div>
+        <div class="feature-visual reveal" aria-hidden="true">
+          <div class="comp comp-phone">
+            <div class="ep phone-card"></div>
+            <span class="ep ball"></span>
+            <span class="ep dot d1"></span>
+            <span class="ep dot d2"></span>
+            <span class="ep dot d3"></span>
+          </div>
+        </div>
+        <div class="feature-cta">
+          <a href="#" class="btn btn-lime btn-lg">Get started for free</a>
         </div>
       </div>
     </section>
 
-    <!-- ================= SHARE ================= -->
+    <!-- ================= 3. SHARE ================= -->
     <section class="feature feature-maroon" id="share">
       <div class="container feature-grid reverse">
+        <div class="feature-text reveal">
+          <h2>Share your Linkstac anywhere you like!</h2>
+          <p>
+            Add your unique Linkstac URL to all the platforms and places you find your
+            audience. Then use your QR code to drive your offline traffic back to your link in bio.
+          </p>
+        </div>
         <div class="feature-visual reveal" aria-hidden="true">
-          <div class="share-grid">
-            <div class="share-tile">Instagram bio</div>
-            <div class="share-tile">TikTok</div>
-            <div class="share-tile">QR code</div>
-            <div class="share-tile">YouTube</div>
-            <div class="share-tile">Email signature</div>
-            <div class="share-tile">X / Twitter</div>
+          <!-- 6 cards + the white bar. script.js moves them between named
+               positions (fan slots, the bar, the scattered collage);
+               CSS transitions animate every move. -->
+          <div class="comp comp-share" id="share-comp">
+            <div class="ep sh"><span></span></div>
+            <div class="ep sh"><span></span></div>
+            <div class="ep sh"><span></span></div>
+            <div class="ep sh"><span></span></div>
+            <div class="ep sh"><span></span></div>
+            <div class="ep sh"><span></span></div>
+            <div class="ep sh-pill"></div>
           </div>
         </div>
-        <div class="feature-text reveal">
-          <h2>Share your Linkstack from your Instagram, TikTok, Twitter and other bios</h2>
-          <p>
-            Add your unique Linkstack URL to all the platforms and places you find your
-            audience. Then use your QR code to drive your offline traffic online.
-          </p>
+        <div class="feature-cta">
           <a href="#" class="btn btn-pink btn-lg">Get started for free</a>
         </div>
       </div>
     </section>
 
-    <!-- ================= ANALYTICS ================= -->
-    <section class="feature feature-cream" id="analytics">
+    <!-- ================= 4. ANALYZE ================= -->
+    <section class="feature feature-olive" id="analytics">
       <div class="container feature-grid">
-        <div class="feature-visual reveal" aria-hidden="true">
-          <div class="stats-card">
-            <p class="stats-label">Lifetime clicks</p>
-            <p class="stats-number">48,291</p>
-            <div class="bars">
-              <span style="--h:40%"></span><span style="--h:65%"></span><span style="--h:50%"></span>
-              <span style="--h:80%"></span><span style="--h:60%"></span><span style="--h:95%"></span>
-              <span style="--h:75%"></span>
-            </div>
-          </div>
-        </div>
         <div class="feature-text reveal">
-          <h2>Analyze your audience and keep your followers engaged</h2>
+          <h2>Analyze your audience and keep them engaged</h2>
           <p>
             Track your engagement over time, monitor revenue and learn what's converting
             your audience. Make informed updates on the fly to keep them coming back.
           </p>
-          <a href="#" class="btn btn-blue btn-lg">Get started for free</a>
+        </div>
+        <div class="feature-visual reveal" aria-hidden="true">
+          <div class="comp comp-stats">
+            <div class="ep s-clicks"></div>
+            <div class="ep s-plays"></div>
+            <div class="ep s-sales"></div>
+            <div class="ep s-visits"></div>
+          </div>
+        </div>
+        <div class="feature-cta">
+          <a href="#" class="btn btn-plum btn-lg">Get started for free</a>
         </div>
       </div>
     </section>
 
-    <!-- ================= CAROUSEL (compulsory) ================= -->
-    <section class="creators" id="creators">
+    <!-- ================= 5. TRUSTED BY (endless strip) =================
+         script.js copies the cards once; CSS slides the strip left by
+         half its width, so it never resets. -->
+    <section class="trusted" id="creators">
       <div class="container">
-        <h2 class="section-title reveal">The fast, friendly and powerful link in bio tool.</h2>
-        <p class="section-sub reveal">Trusted by creators, brands and businesses of every size.</p>
+        <h2 class="section-title reveal">The only link in bio trusted by 70M+ <span class="accent">culture creators</span></h2>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track" id="marquee-track">
+          <div class="ep profile-card oval m1"></div>
+          <div class="ep profile-card round m2"></div>
+          <div class="ep profile-card round m3"></div>
+          <div class="ep profile-card oval m4"></div>
+          <div class="ep profile-card round m5"></div>
+          <div class="ep profile-card oval m6"></div>
+          <div class="ep profile-card round m7"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 6. THREE BIG FEATURE CARDS ================= -->
+    <section class="features3">
+      <div class="container features3-list">
+        <a href="#" class="big-card bc-pink reveal">
+          <div class="bc-visual row3" aria-hidden="true">
+            <div class="ep r-peach"></div>
+            <div class="ep r-dark"><span></span><span></span><span></span></div>
+            <div class="ep r-photo"></div>
+          </div>
+          <h3>Share every type of content in limitless ways</h3>
+        </a>
+        <a href="#" class="big-card bc-lime reveal">
+          <div class="bc-visual products" aria-hidden="true">
+            <div class="ep pr pr1"></div>
+            <div class="ep pr pr2"></div>
+            <div class="ep pr pr3"></div>
+            <div class="ep pr pr4"></div>
+          </div>
+          <h3>Sell products, collect payments and make monetization simple</h3>
+        </a>
+        <a href="#" class="big-card bc-navy reveal">
+          <div class="bc-visual audience" aria-hidden="true">
+            <div class="ep au-phone"></div>
+            <div class="ep au-mail"></div>
+            <div class="ep au-form"></div>
+          </div>
+          <h3>Grow, own and engage your audience across all of your channels</h3>
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= 7. PLANS ================= -->
+    <section class="plans">
+      <div class="container plans-inner reveal">
+        <h2>The fast, friendly and powerful link in bio tool.</h2>
+        <a href="#" class="btn btn-pink btn-lg">Explore all plans</a>
+      </div>
+    </section>
+
+    <!-- ================= 8. FEATURED IN + TESTIMONIALS (carousel, compulsory) ================= -->
+    <section class="featured" id="featured">
+      <div class="container">
+        <h2 class="section-title reveal">As featured in...</h2>
+        <div class="logo-grid reveal" aria-hidden="true">
+          <span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span>
+        </div>
       </div>
 
-      <div class="carousel" id="carousel" tabindex="0" aria-roledescription="carousel" aria-label="Creators using Linkstack">
-        <button class="carousel-btn prev" id="prev" aria-label="Previous slide">&#8592;</button>
-
+      <!-- One testimonial at a time, endless loop, arrows below -->
+      <div class="carousel" id="carousel" tabindex="0" aria-roledescription="carousel" aria-label="Testimonials">
         <div class="carousel-viewport">
           <ul class="carousel-track" id="track">
-            <li class="slide"><article class="creator-card c1"><div class="avatar">SM</div><h3>Selena M.</h3><p>Musician</p><span class="handle">@selenamusic</span></article></li>
-            <li class="slide"><article class="creator-card c2"><div class="avatar">PK</div><h3>Pistakio</h3><p>Food brand</p><span class="handle">@pistakio</span></article></li>
-            <li class="slide"><article class="creator-card c3"><div class="avatar">AR</div><h3>Arjun R.</h3><p>Photographer</p><span class="handle">@arjunshoots</span></article></li>
-            <li class="slide"><article class="creator-card c4"><div class="avatar">TL</div><h3>The Loop</h3><p>Podcast</p><span class="handle">@theloopcast</span></article></li>
-            <li class="slide"><article class="creator-card c5"><div class="avatar">MV</div><h3>Maya V.</h3><p>Fitness coach</p><span class="handle">@mayamoves</span></article></li>
-            <li class="slide"><article class="creator-card c6"><div class="avatar">KD</div><h3>Kiln &amp; Dust</h3><p>Ceramics studio</p><span class="handle">@kilnanddust</span></article></li>
+            <li class="slide"><div class="testimonial"><div class="ep t-photo tp1"></div><div class="t-quote"><span></span><span></span><span></span></div><div class="t-name"><span></span><span></span></div></div></li>
+            <li class="slide"><div class="testimonial"><div class="ep t-photo tp2"></div><div class="t-quote"><span></span><span></span><span></span></div><div class="t-name"><span></span><span></span></div></div></li>
+            <li class="slide"><div class="testimonial"><div class="ep t-photo tp3"></div><div class="t-quote"><span></span><span></span><span></span></div><div class="t-name"><span></span><span></span></div></div></li>
+            <li class="slide"><div class="testimonial"><div class="ep t-photo tp4"></div><div class="t-quote"><span></span><span></span><span></span></div><div class="t-name"><span></span><span></span></div></div></li>
+            <li class="slide"><div class="testimonial"><div class="ep t-photo tp5"></div><div class="t-quote"><span></span><span></span><span></span></div><div class="t-name"><span></span><span></span></div></div></li>
           </ul>
         </div>
-
-        <button class="carousel-btn next" id="next" aria-label="Next slide">&#8594;</button>
-        <div class="carousel-dots" id="dots" role="tablist" aria-label="Choose slide"></div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="prev" aria-label="Previous testimonial">&#8592;</button>
+          <button class="carousel-btn" id="next" aria-label="Next testimonial">&#8594;</button>
+        </div>
       </div>
     </section>
 
-    <!-- ================= FAQ ================= -->
+    <!-- ================= 9. FAQ ================= -->
     <section class="faq" id="faq">
       <div class="container narrow">
-        <h2 class="section-title reveal">Got questions?</h2>
+        <h2 class="section-title reveal">Questions? Answered</h2>
         <div class="faq-list">
           <details class="reveal">
-            <summary>Why do I need a link in bio tool?</summary>
-            <p>Most social platforms only let you add one link. A link in bio page lets you share all your content, shops and socials from that single link.</p>
+            <summary>Is Linkstac the original link in bio tool?</summary>
+            <p>Linkstac is a link in bio tool: one link that holds everything you want to share.</p>
           </details>
           <details class="reveal">
-            <summary>Is Linkstack free?</summary>
-            <p>Yes. The free plan covers unlimited links and basic customization. Paid plans add analytics, scheduling and more themes.</p>
+            <summary>Can you get paid and sell things from a Linkstac?</summary>
+            <p>Yes. You can sell products, collect payments and accept tips right from your page.</p>
           </details>
           <details class="reveal">
-            <summary>Can I use my own domain?</summary>
-            <p>Yes, on paid plans you can connect a custom domain so your page lives at your own URL.</p>
+            <summary>Is Linkstac safe to use on all of my social media profiles?</summary>
+            <p>Yes. Your Linkstac link works on every social platform that allows a link in your bio.</p>
           </details>
           <details class="reveal">
-            <summary>How many links can I add?</summary>
-            <p>As many as you like. Reorder them anytime by dragging, and hide or schedule links when you need to.</p>
+            <summary>What makes Linkstac better than the other link in bio options?</summary>
+            <p>It's quick to set up, easy to customize and comes with analytics built in.</p>
+          </details>
+          <details class="reveal">
+            <summary>How can I drive more traffic to and through my Linkstac?</summary>
+            <p>Share your link everywhere your audience is, and keep your most important links at the top.</p>
+          </details>
+          <details class="reveal">
+            <summary>How many links should I have on my Linkstac?</summary>
+            <p>As many as you need, but a short, focused list usually gets more clicks.</p>
+          </details>
+          <details class="reveal">
+            <summary>Do I need a website to use Linkstac?</summary>
+            <p>No. Your Linkstac page can work as a simple website on its own.</p>
+          </details>
+          <details class="reveal">
+            <summary>Where can I download the app?</summary>
+            <p>The app is available on the App Store and Google Play.</p>
           </details>
         </div>
       </div>
     </section>
 
-    <!-- ================= FINAL CTA ================= -->
+    <!-- ================= 10. FINAL CTA ================= -->
     <section class="cta" id="cta">
+      <span class="ep blob-cyan" aria-hidden="true"></span>
+      <span class="ep blob-flower" aria-hidden="true"></span>
       <div class="container cta-inner reveal">
         <h2>Jumpstart your corner of the internet today</h2>
         <form class="claim-form center" onsubmit="return false;">
           <label class="claim-input">
-            <span>linkstack/</span>
-            <input type="text" placeholder="yourname" aria-label="Choose your username" />
+            <span>linkst.ac/</span>
+            <input type="text" aria-label="Choose your username" />
           </label>
-          <button type="submit" class="btn btn-lime btn-lg">Claim your Linkstack</button>
+          <button type="submit" class="btn btn-lime btn-lg">Claim your Linkstac</button>
         </form>
       </div>
     </section>
@@ -218,27 +310,75 @@
 
   <!-- ================= FOOTER ================= -->
   <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <h4>Company</h4>
-        <ul><li><a href="#">About</a></li><li><a href="#">Careers</a></li><li><a href="#">Blog</a></li><li><a href="#">Press</a></li></ul>
+    <div class="footer-card">
+      <div class="footer-grid">
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">The Linkstac Blog</a></li>
+            <li><a href="#">Engineering Blog</a></li>
+            <li><a href="#">Marketplace</a></li>
+            <li><a href="#">Tools</a></li>
+            <li><a href="#">What's New</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Newsroom</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Link in Bio</a></li>
+            <li><a href="#">Social Good</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Community</h4>
+          <ul>
+            <li><a href="#">Linkstac for Enterprise</a></li>
+            <li><a href="#">2023 Creator Report</a></li>
+            <li><a href="#">2022 Creator Report</a></li>
+            <li><a href="#">Charities</a></li>
+            <li><a href="#">Creator Profile Directory</a></li>
+            <li><a href="#">Explore Templates</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Topics</a></li>
+            <li><a href="#">Getting Started</a></li>
+            <li><a href="#">Linkstac Pro</a></li>
+            <li><a href="#">Features &amp; How-Tos</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Report a Violation</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Trust &amp; Legal</h4>
+          <ul>
+            <li><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy Notice</a></li>
+            <li><a href="#">Cookie Notice</a></li>
+            <li><a href="#">Trust Center</a></li>
+            <li><a href="#">Cookies Preferences</a></li>
+            <li><a href="#">Transparency Report</a></li>
+            <li><a href="#">Law Enforcement Access Policy</a></li>
+            <li><a href="#">Human Rights</a></li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <h4>Community</h4>
-        <ul><li><a href="#">Creators</a></li><li><a href="#">Charities</a></li><li><a href="#">Creator report</a></li></ul>
-      </div>
-      <div>
-        <h4>Support</h4>
-        <ul><li><a href="#">Help center</a></li><li><a href="#">Getting started</a></li><li><a href="#">FAQs</a></li></ul>
-      </div>
-      <div>
-        <h4>Legal</h4>
-        <ul><li><a href="#">Terms</a></li><li><a href="#">Privacy</a></li><li><a href="#">Cookies</a></li></ul>
+
+      <p class="lang"><a href="#" class="active">English</a><a href="#">Português (Brasil)</a></p>
+
+      <div class="footer-bottom">
+        <div class="footer-actions">
+          <a href="#" class="btn btn-light">Log in</a>
+          <a href="#" class="btn btn-lime">Get started for free</a>
+        </div>
+        <div class="footer-extras" aria-hidden="true">
+          <span class="badge"></span><span class="badge"></span>
+          <span class="social"></span><span class="social"></span><span class="social"></span><span class="social"></span><span class="social"></span>
+        </div>
       </div>
     </div>
-    <div class="container footer-bottom">
-      <p>Built for SUTT Frontend Task 1 as a practice clone of the Linktree landing page. Not affiliated with Linktree.</p>
-    </div>
+    <p class="footer-note">Built for SUTT Frontend Task 1 as a practice clone of the Linktree landing page. Not affiliated with Linktree.</p>
   </footer>
 
   <script src="script.js"></script>
