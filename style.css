@@ -469,36 +469,104 @@ h2 { font-size: var(--fs-h2); }
 .section-title { text-align: center; }
 .accent { color: var(--blue); }
 
-.marquee { margin-top: var(--space-6); overflow: hidden; }
+/* Rotating word: all words are stacked in the same spot. Only the one
+   with "is-current" is visible; the rest wait just BELOW the line
+   (translateY(100%)), clipped by overflow: hidden.
+   - leaving word: shoots UP and out, fast (accelerating curve)
+   - next word: rises in from below and settles (decelerating curve)
+   The waiting state has no transition, so a word that has left snaps
+   back below invisibly, ready for its next turn. */
+.rotator {
+  display: block;          /* own line, centered like the heading */
+  position: relative;
+  height: 1.15em;
+  overflow: hidden;
+  white-space: nowrap;     /* each word stays on one line */
+  color: var(--blue);
+}
+.rotator .word {
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transform: translateY(100%);
+}
+.rotator .word.is-current {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+.rotator .word.is-leaving {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: transform 0.28s cubic-bezier(0.7, 0, 0.84, 0), opacity 0.28s ease-in;
+}
+
+/* The strip's movement is done in script.js (auto-scroll + drag), so it
+   can respond to mouse and touch. */
+.marquee {
+  margin-top: var(--space-6);
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;   /* vertical swipes still scroll the page */
+  user-select: none;
+}
+.marquee.dragging { cursor: grabbing; }
 .marquee-track {
   display: flex;
   align-items: center;
   width: max-content;
-  animation: marquee 40s linear infinite; /* -50% = one full set: no reset */
   will-change: transform;
 }
+/* Each card is a 3D flip card: two faces back to back. Hovering with a
+   mouse turns the inner .flip 180deg, showing the back face.
+   backface-visibility: hidden hides whichever face is turned away. */
 .profile-card {
   flex-shrink: 0;
   width: 210px;
   height: 260px;
   margin-right: var(--space-3); /* margin, not gap, so both halves match */
-  transition: transform 0.35s var(--ease);
+  perspective: 900px;           /* depth for the 3D turn */
 }
-.profile-card:hover { transform: scale(1.04); }
 .profile-card.oval  { border-radius: 50% / 40%; }
 .profile-card.round { border-radius: 40px; }
-.m1 { background: #2e2e2e; }
-.m2 { background: var(--white); }
-.m3 { background: #c48b74; }
-.m4 { background: #2b3a8c; }
-.m5 { background: #9fb3c8; }
-.m6 { background: #e98a5c; }
-.m7 { background: var(--plum); }
-
-@keyframes marquee {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
+.flip {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backface-visibility: hidden;
+}
+.front { background: var(--c); }
+/* back: same colour family, darker, with a mini profile (avatar + 2 links) */
+.back {
+  transform: rotateY(180deg);
+  background: color-mix(in srgb, var(--c) 55%, #000);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.back i { width: 56px; height: 56px; border-radius: 50%; background: var(--lime); margin-bottom: 6px; }
+.back b { width: 62%; height: 22px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.85); }
+@media (hover: hover) {
+  .profile-card:hover .flip { transform: rotateY(180deg); }
+}
+.m1 { --c: #2e2e2e; }
+.m2 { --c: var(--white); }
+.m3 { --c: #c48b74; }
+.m4 { --c: #2b3a8c; }
+.m5 { --c: #9fb3c8; }
+.m6 { --c: #e98a5c; }
+.m7 { --c: var(--plum); }
 
 /* ---------- 9. Three big feature cards ---------- */
 .features3 {

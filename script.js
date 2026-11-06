@@ -14,8 +14,79 @@ function duplicateChildren(track) {
   Array.from(track.children).forEach((item) => track.append(item.cloneNode(true)));
 }
 duplicateChildren(document.getElementById("panels-track"));
-// same trick for the "trusted by" strip, which slides left forever
-duplicateChildren(document.getElementById("marquee-track"));
+
+/* ---------- 0a. "Trusted by" strip: endless + draggable ----------
+   The cards are copied once, so the track holds two identical sets.
+   "offset" is how far the track has moved left. Whenever it passes
+   one full set, we wrap it back with %, which looks identical, so the
+   strip never ends. Every frame:
+     - normally it creeps left at AUTO_SPEED (stopped while a mouse is over it)
+     - while you drag, it follows your finger / mouse exactly
+     - after you let go, it keeps your swipe's speed ("momentum"),
+       which fades away until it's back to the normal creep */
+const marquee = document.querySelector(".marquee");
+const marqueeTrack = document.getElementById("marquee-track");
+duplicateChildren(marqueeTrack);
+
+const AUTO_SPEED = matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 40; // px per second
+let offset = 0;
+let momentum = 0;          // extra px per second left over from a swipe
+let mqDragging = false;
+let mqHovered = false;     // mouse is over the strip: stop auto-scroll
+let lastX = 0;
+let lastMoveTime = 0;
+let lastFrame = performance.now();
+
+function marqueeFrame(now) {
+  const dt = Math.min((now - lastFrame) / 1000, 0.05); // seconds since last frame
+  lastFrame = now;
+  if (!mqDragging) {
+    offset += ((mqHovered ? 0 : AUTO_SPEED) + momentum) * dt;
+    momentum *= Math.pow(0.05, dt);   // fades to ~5% each second
+  }
+  const setWidth = marqueeTrack.scrollWidth / 2;       // one full set of cards
+  offset = ((offset % setWidth) + setWidth) % setWidth; // wrap: works both directions
+  marqueeTrack.style.transform = `translate3d(${-offset}px, 0, 0)`;
+  requestAnimationFrame(marqueeFrame);
+}
+requestAnimationFrame(marqueeFrame);
+
+marquee.addEventListener("pointerdown", (e) => {
+  mqDragging = true;
+  momentum = 0;
+  lastX = e.clientX;
+  lastMoveTime = performance.now();
+  marquee.classList.add("dragging");
+  marquee.setPointerCapture(e.pointerId);
+});
+
+marquee.addEventListener("pointermove", (e) => {
+  if (!mqDragging) return;
+  const now = performance.now();
+  const dx = e.clientX - lastX;           // how far the pointer moved
+  offset -= dx;                           // drag right = move strip right
+  const dt = Math.max((now - lastMoveTime) / 1000, 0.001);
+  momentum = -dx / dt - AUTO_SPEED;       // remember the swipe speed
+  lastX = e.clientX;
+  lastMoveTime = now;
+});
+
+function endMarqueeDrag() {
+  if (!mqDragging) return;
+  mqDragging = false;
+  marquee.classList.remove("dragging");
+  // a pause before letting go means no fling
+  if (performance.now() - lastMoveTime > 100) momentum = 0;
+  momentum = Math.max(-3000, Math.min(3000, momentum)); // keep flings sane
+}
+marquee.addEventListener("pointerup", endMarqueeDrag);
+
+// stop while a MOUSE is over the strip (touch has no hover, so it keeps going)
+marquee.addEventListener("pointerenter", (e) => {
+  if (e.pointerType === "mouse") mqHovered = true;
+});
+marquee.addEventListener("pointerleave", () => (mqHovered = false));
+marquee.addEventListener("pointercancel", endMarqueeDrag);
 
 /* ---------- 0b. Share section loop ----------
    Starts as a fanned stack of 5 cards (a 6th waits hidden at the back).
@@ -173,6 +244,20 @@ if (!prefersReducedMotion) {
     { threshold: [0, 0.6] }
   ).observe(shareComp);
 }
+
+/* ---------- 0c. Rotating word in the "trusted by" heading ----------
+   Every 2s: the current word gets "is-leaving" (shoots up), the next
+   word gets "is-current" (rises in). After the exit animation, the old
+   word drops its class and snaps back below, out of sight. */
+const rotatorWords = Array.from(document.querySelectorAll(".rotator .word"));
+let wordIndex = 0;
+setInterval(() => {
+  const leaving = rotatorWords[wordIndex];
+  leaving.classList.replace("is-current", "is-leaving");
+  setTimeout(() => leaving.classList.remove("is-leaving"), 300);
+  wordIndex = (wordIndex + 1) % rotatorWords.length;
+  rotatorWords[wordIndex].classList.add("is-current");
+}, 2000);
 
 /* ---------- 1. Mobile menu ---------- */
 const menuToggle = document.getElementById("menu-toggle");
