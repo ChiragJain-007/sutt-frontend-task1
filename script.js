@@ -33,6 +33,8 @@ let offset = 0;
 let momentum = 0;          // extra px per second left over from a swipe
 let mqDragging = false;
 let mqHovered = false;     // mouse is over the strip: stop auto-scroll
+let downX = 0;             // where / when the finger went down, to spot a tap
+let downTime = 0;
 let lastX = 0;
 let lastMoveTime = 0;
 let lastFrame = performance.now();
@@ -41,7 +43,8 @@ function marqueeFrame(now) {
   const dt = Math.min((now - lastFrame) / 1000, 0.05); // seconds since last frame
   lastFrame = now;
   if (!mqDragging) {
-    offset += ((mqHovered ? 0 : AUTO_SPEED) + momentum) * dt;
+    const paused = mqHovered || marquee.querySelector(".flipped"); // hover, or a tapped card is open
+    offset += ((paused ? 0 : AUTO_SPEED) + momentum) * dt;
     momentum *= Math.pow(0.05, dt);   // fades to ~5% each second
   }
   const setWidth = marqueeTrack.scrollWidth / 2;       // one full set of cards
@@ -56,6 +59,8 @@ marquee.addEventListener("pointerdown", (e) => {
   momentum = 0;
   lastX = e.clientX;
   lastMoveTime = performance.now();
+  downX = e.clientX;
+  downTime = lastMoveTime;
   marquee.classList.add("dragging");
   marquee.setPointerCapture(e.pointerId);
 });
@@ -64,6 +69,7 @@ marquee.addEventListener("pointermove", (e) => {
   if (!mqDragging) return;
   const now = performance.now();
   const dx = e.clientX - lastX;           // how far the pointer moved
+  if (Math.abs(e.clientX - downX) > 8) unflipAll(); // it's a swipe: close any open card
   offset -= dx;                           // drag right = move strip right
   const dt = Math.max((now - lastMoveTime) / 1000, 0.001);
   momentum = -dx / dt - AUTO_SPEED;       // remember the swipe speed
@@ -79,7 +85,24 @@ function endMarqueeDrag() {
   if (performance.now() - lastMoveTime > 100) momentum = 0;
   momentum = Math.max(-3000, Math.min(3000, momentum)); // keep flings sane
 }
-marquee.addEventListener("pointerup", endMarqueeDrag);
+marquee.addEventListener("pointerup", (e) => {
+  endMarqueeDrag();
+  // Phone tap = finger barely moved and lifted quickly -> flip that card.
+  // (A mouse uses hover instead, so only touch / pen taps count here.)
+  const isTap = Math.abs(e.clientX - downX) < 8 && performance.now() - downTime < 350;
+  if (e.pointerType !== "mouse" && isTap) {
+    const under = document.elementFromPoint(e.clientX, e.clientY);
+    const card = under && under.closest(".profile-card");
+    if (!card) return;
+    const wasFlipped = card.classList.contains("flipped");
+    unflipAll();                                   // only one card open at a time
+    if (!wasFlipped) card.classList.add("flipped");
+  }
+});
+
+function unflipAll() {
+  marquee.querySelectorAll(".flipped").forEach((c) => c.classList.remove("flipped"));
+}
 
 // stop while a MOUSE is over the strip (touch has no hover, so it keeps going)
 marquee.addEventListener("pointerenter", (e) => {

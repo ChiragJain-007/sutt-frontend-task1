@@ -388,7 +388,40 @@ h2 { font-size: var(--fs-h2); }
 
 /* Customize: tilted phone with a round object and 3 icon circles */
 .comp-phone { aspect-ratio: 4 / 5; max-width: 400px; }
-.phone-card { left: 20%; top: 0; width: 52%; height: 94%; background: #9b1c1c; border-radius: var(--radius-lg); transform: rotate(4deg); }
+/* The phone flips 180deg at a time, forever: a fast start that keeps
+   DECELERATING into a stop (ease-out curve), a short rest, then the next
+   half-turn. It has two faces back to back (see .face), so you see its
+   back after the first half-turn and its front again after the second. */
+.comp-phone { perspective: 1100px; }   /* depth for the 3D turn */
+.phone-card {
+  left: 20%;
+  top: 0;
+  width: 52%;
+  height: 94%;
+  border-radius: var(--radius-lg);
+  transform-style: preserve-3d;
+  animation: phone-flip 4.4s infinite;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); /* each turn decelerates */
+}
+.phone-front { background: #9b1c1c; }
+.phone-back {
+  transform: rotateY(180deg);
+  background: #6e1212;
+}
+.phone-back i {             /* camera bump, so the back reads as a back */
+  position: absolute;
+  left: 10%;
+  top: 6%;
+  width: 26%;
+  aspect-ratio: 1;
+  border-radius: 30%;
+  background: rgba(0, 0, 0, 0.25);
+}
+@keyframes phone-flip {
+  0%       { transform: rotate(4deg) rotateY(0deg); }
+  35%, 50% { transform: rotate(4deg) rotateY(180deg); }  /* turn, then rest */
+  85%, 100%{ transform: rotate(4deg) rotateY(360deg); }  /* turn back to the front, rest */
+}
 .ball { left: 66%; top: 8%; width: 24%; aspect-ratio: 1; border-radius: 50%; background: #d7262f; }
 .dot  { left: 76%; width: 11%; aspect-ratio: 1; border-radius: 50%; background: #f7941d; }
 .d1 { top: 40%; }
@@ -469,27 +502,29 @@ h2 { font-size: var(--fs-h2); }
 .section-title { text-align: center; }
 .accent { color: var(--blue); }
 
-/* Rotating word: all words are stacked in the same spot. Only the one
-   with "is-current" is visible; the rest wait just BELOW the line
-   (translateY(100%)), clipped by overflow: hidden.
+/* Rotating word. All words sit in the SAME grid cell (grid-area 1 / 1),
+   so they overlap and the line is exactly as tall as the text. No fixed
+   heights or absolute positioning, so every browser (incl. Safari on
+   iPhone) lays it out the same way.
+   Only the word with "is-current" is visible; the rest wait just BELOW
+   the line, hidden by overflow: hidden.
    - leaving word: shoots UP and out, fast (accelerating curve)
    - next word: rises in from below and settles (decelerating curve)
    The waiting state has no transition, so a word that has left snaps
    back below invisibly, ready for its next turn. */
 .rotator {
-  display: block;          /* own line, centered like the heading */
-  position: relative;
-  height: 1.15em;
+  display: grid;
   overflow: hidden;
-  white-space: nowrap;     /* each word stays on one line */
   color: var(--blue);
+  white-space: nowrap;      /* each word stays on one line */
+  line-height: 1.2;         /* taller than the heading's tight 1.02, so   */
+  padding-block: 0.05em;    /* tall capitals and "g"/"p" tails aren't clipped */
 }
 .rotator .word {
-  position: absolute;
-  left: 0;
-  right: 0;
+  display: block;
+  grid-area: 1 / 1;
   opacity: 0;
-  transform: translateY(100%);
+  transform: translateY(110%);
 }
 .rotator .word.is-current {
   opacity: 1;
@@ -498,7 +533,7 @@ h2 { font-size: var(--fs-h2); }
 }
 .rotator .word.is-leaving {
   opacity: 0;
-  transform: translateY(-100%);
+  transform: translateY(-110%);
   transition: transform 0.28s cubic-bezier(0.7, 0, 0.84, 0), opacity 0.28s ease-in;
 }
 
@@ -557,9 +592,11 @@ h2 { font-size: var(--fs-h2); }
 }
 .back i { width: 56px; height: 56px; border-radius: 50%; background: var(--lime); margin-bottom: 6px; }
 .back b { width: 62%; height: 22px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.85); }
+/* mouse: hover flips it.  phone: a tap adds "flipped" (script.js) */
 @media (hover: hover) {
   .profile-card:hover .flip { transform: rotateY(180deg); }
 }
+.profile-card.flipped .flip { transform: rotateY(180deg); }
 .m1 { --c: #2e2e2e; }
 .m2 { --c: var(--white); }
 .m3 { --c: #c48b74; }
